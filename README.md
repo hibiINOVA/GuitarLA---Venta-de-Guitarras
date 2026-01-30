@@ -1,18 +1,137 @@
-# React + Vite
+# React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ¿Qué es React?
 
-Currently, two official plugins are available:
+React es una **librería de JavaScript** para construir interfaces de usuario (UI). Fue creada por Facebook y se basa en dividir la interfaz en **componentes reutilizables** que se actualizan de manera eficiente cuando cambian los datos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React se enfoca principalmente en la capa de la vista (View) y no es un framework completo.
 
-## React Compiler
+## Componentes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Un **componente** es la unidad básica de React. Representa una parte de la interfaz de usuario y puede reutilizarse en diferentes partes de una aplicación.
 
-## Expanding the ESLint configuration
+Tipos de componentes:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# GuitarLA---Venta-de-Guitarras
-# GuitarLA---Venta-de-Guitarras
+* Componentes funcionales (los más utilizados actualmente)
+* Componentes de clase (obsoletos en la mayoría de los casos)
+
+Ejemplo de componente funcional:
+
+```jsx
+function Componente() {
+  return <h1>Hola React</h1>
+}
+```
+
+## JSX
+
+JSX es una extensión de JavaScript que permite escribir una sintaxis similar a HTML dentro del código JavaScript.
+
+Características:
+
+* Permite incrustar expresiones con `{ }`
+* No es HTML real, se transforma a JavaScript
+* Mejora la legibilidad del código
+
+Ejemplo:
+
+```jsx
+const nombre = "React"
+
+return <h2>Hola {nombre}</h2>
+```
+
+## Props (Propiedades)
+
+Las **props** permiten pasar información de un componente padre a un componente hijo.
+
+Características:
+
+* Son de solo lectura
+* Permiten reutilizar componentes con diferentes datos
+
+Ejemplo:
+
+```jsx
+function Saludo({ nombre }) {
+  return <p>Hola {nombre}</p>
+}
+```
+
+## Estado (State)
+
+El **estado** representa información que puede cambiar durante la ejecución de la aplicación.
+
+En componentes funcionales se maneja con el hook `useState`.
+
+Ejemplo:
+
+```jsx
+const [contador, setContador] = useState(0)
+```
+
+Cuando el estado cambia, React vuelve a renderizar el componente.
+
+## Renderizado condicional
+
+React permite mostrar distintos elementos dependiendo de una condición lógica.
+
+Ejemplo:
+
+```jsx
+{activo ? <p>Activo</p> : <p>Inactivo</p>}
+```
+
+## Renderizado de listas
+
+Para renderizar listas se utiliza el método `map()`.
+
+Ejemplo:
+
+```jsx
+items.map(item => (
+  <li key={item.id}>{item.nombre}</li>
+))
+```
+
+El atributo `key` debe ser único para cada elemento.
+
+## Virtual DOM
+
+React utiliza un **Virtual DOM**, que es una representación en memoria del DOM real.
+
+Proceso:
+
+1. Cambia el estado
+2. React actualiza el Virtual DOM
+3. Compara los cambios
+4. Actualiza solo lo necesario en el DOM real
+
+Esto mejora el rendimiento de la aplicación.
+
+## Flujo de datos unidireccional
+
+React maneja un flujo de datos en una sola dirección:
+
+* Los datos fluyen del componente padre al hijo
+* Los componentes hijos no modifican directamente los datos del padre
+
+Esto hace el código más predecible y fácil de mantener.
+
+## Hooks
+
+Los **hooks** permiten usar funcionalidades de React sin utilizar clases.
+
+Hooks comunes:
+
+* `useState`
+* `useEffect`
+* `useContext`
+
+Ejemplo:
+
+```jsx
+useEffect(() => {
+  console.log("Componente renderizado")
+}, [])
+```
