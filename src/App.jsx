@@ -18,25 +18,29 @@ function App() {
 
   console.log(data)
 
+  const [cart, setCart] = useState([])
+
   //useEffect(()=>{
   //  setData(db)
   //},[])
 
   return (
     <div>
-      <Header/>
+      <Header
+        cart={cart}
+        setCart={setCart}
+      />
 
       <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map(product => (
+          {data.map(guitar => (
           <Card
-            key={product.id}
-            imagen={product.image}
-            nombre={product.name}
-            descripcion={product.description}
-            precio={product.price}
+            key={guitar.id}
+            guitar={guitar}
+            cart={cart}
+            setCart={setCart}
           />
         ))}
 
