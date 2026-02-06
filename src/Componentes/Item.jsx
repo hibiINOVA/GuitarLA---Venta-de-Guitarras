@@ -5,6 +5,30 @@ export default function Item({ item, cart, setCart }) {
         setCart(cart.filter(p => p.id !== id))
     }
 
+    const disminuirCantidad = () => {
+        if (quantity === 1) {
+            eliminarItem(id)
+        } else {
+            setCart(
+                cart.map(p =>
+                    p.id === id
+                        ? { ...p, quantity: p.quantity - 1 }
+                        : p
+                )
+            )
+        }
+    }
+
+    const aumentarCantidad = () => {
+        setCart(
+            cart.map(p =>
+                p.id === id
+                    ? { ...p, quantity: p.quantity + 1 }
+                    : p
+            )
+        )
+    }
+
     return (
         <tr>
             <td>
@@ -15,35 +39,18 @@ export default function Item({ item, cart, setCart }) {
                     style={{ width: '50px' }}
                 />
             </td>
+
             <td>{name}</td>
             <td className="fw-bold">${price}</td>
 
             <td className="d-flex align-items-center gap-2">
-                <button
-                    className="btn btn-dark"
-                    onClick={() =>
-                        setCart(cart.map(p =>
-                            p.id === id
-                                ? { ...p, quantity: Math.max(1, p.quantity - 1) }
-                                : p
-                        ))
-                    }
-                >
+                <button className="btn btn-dark" onClick={disminuirCantidad}>
                     -
                 </button>
 
                 <span className="fw-bold">{quantity}</span>
 
-                <button
-                    className="btn btn-dark"
-                    onClick={() =>
-                        setCart(cart.map(p =>
-                            p.id === id
-                                ? { ...p, quantity: p.quantity + 1 }
-                                : p
-                        ))
-                    }
-                >
+                <button className="btn btn-dark" onClick={aumentarCantidad}>
                     +
                 </button>
             </td>
