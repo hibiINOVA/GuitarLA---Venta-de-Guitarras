@@ -1,7 +1,21 @@
 export default function Card({ guitar, cart, setCart }) {
   const { name, image, description, price } = guitar
   const hanbleClick = (item) => {
-    setCart([...cart, 
+    const existeEnCarrito = cart.find((guitarra) => guitarra.name === item.name)
+    if (existeEnCarrito) {
+        const carritoActualizado = cart.map((guitarra) => {
+            if (guitarra.name === item.name) {
+                return {
+                    ...guitarra,
+                    quantity: guitarra.quantity + 1
+                }
+            } else {
+                return guitarra
+            }
+        })
+        setCart(carritoActualizado)
+    } else {
+      setCart([...cart, 
         {
             name: item.name,
             image: item.image,
@@ -9,6 +23,19 @@ export default function Card({ guitar, cart, setCart }) {
         }
     ])
 
+  }
+  }
+
+  function addToCart (item){
+    const itemExit = cart.findIndex((guitar) => guitar.name === item.name)
+    if(itemExit >= 0){
+        const updatedCart = [...cart]
+        updatedCart[itemExit].quantity ++
+        setCart(updatedCart)
+    }else{
+        item.quantity = 1
+        setCart([...cart, item])
+    }
   }
 return (
         <div className="col-md-6 col-lg-4 my-4 row align-items-center">
@@ -26,7 +53,7 @@ return (
                 <button 
                     type="button"
                     className="btn btn-dark w-100"
-                    onClick={() => hanbleClick(guitar)}
+                    onClick={() => addToCart(guitar)}
                 >Agregar al Carrito</button>
             </div>
         </div>
