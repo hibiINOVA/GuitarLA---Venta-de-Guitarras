@@ -18,11 +18,14 @@ function App() {
 
   console.log(data)
 
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem('cart')
+    return storedCart ? JSON.parse(storedCart) : []
+  })
 
-  //useEffect(()=>{
-  //  setData(db)
-  //},[])
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
 
   return (
     <div>

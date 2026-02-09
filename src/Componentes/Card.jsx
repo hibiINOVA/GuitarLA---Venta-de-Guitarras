@@ -26,17 +26,30 @@ export default function Card({ guitar, cart, setCart }) {
   }
   }
 
-  function addToCart (item){
-    const itemExit = cart.findIndex((guitar) => guitar.name === item.name)
-    if(itemExit >= 0){
-        const updatedCart = [...cart]
-        updatedCart[itemExit].quantity ++
+  function addToCart(item) {
+    const itemExist = cart.find(p => p.id === item.id)
+
+    if (itemExist) {
+        const updatedCart = cart.map(p =>
+        p.id === item.id
+            ? { ...p, quantity: p.quantity + 1 }
+            : p
+        )
         setCart(updatedCart)
-    }else{
-        item.quantity = 1
-        setCart([...cart, item])
+    } else {
+        setCart([
+        ...cart,
+        {
+            id: item.id,
+            name: item.name,
+            image: item.image,
+            price: item.price,
+            quantity: 1
+        }
+        ])
     }
-  }
+    }
+
 return (
         <div className="col-md-6 col-lg-4 my-4 row align-items-center">
             <div className="col-4">

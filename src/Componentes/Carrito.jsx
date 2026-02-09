@@ -33,8 +33,15 @@ export default function Carrito({ cart = [], setCart }) {
         </table>
       )}
     <p className="text-end">Total pagar: <span className="fw-bold">${cardTotal()}</span></p>
-    <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
-
+    <button
+      className="btn btn-dark w-100 mt-3 p-2"
+      onClick={() => {
+        setCart([])
+        localStorage.removeItem('cart')
+      }}
+    >
+      Vaciar Carrito
+    </button>
     </div>
   )
 }
