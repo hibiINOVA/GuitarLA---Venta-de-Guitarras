@@ -2,7 +2,7 @@ import React from 'react'
 import Item from './Item.jsx'
 export default function Carrito({ cart = [], setCart }) {
     const isEmpty = () => cart.length === 0
-    const cardTotal = () => cart.reduce((total, item) => total + item.price * item.quantity, 0)
+    const cardTotal = () => cart.reduce((total, item) => total + item.precio * item.quantity, 0)
   return (
     <div id="carrito" className="bg-white p-3">
 
